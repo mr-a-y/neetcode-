@@ -1,0 +1,20 @@
+**this is the solution with hashset due to hash set being a sarch complexity of O(1)
+*leet code 217
+class Solution {
+    public boolean hasDuplicate(int[] nums) {
+     boolean ans = false ;
+     if (nums.length > 1 ){
+        HashSet<Integer> a = new HashSet<Integer>();
+      for (int i= 0; i<nums.length;i++){
+        if(a.contains(nums[i]) == false ){
+            a.(nums[i]);
+        }
+        else{
+            ans = true ;
+            break ;
+        }
+      }
+     }
+     return ans;
+    }
+}
