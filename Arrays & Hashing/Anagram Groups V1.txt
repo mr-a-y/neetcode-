@@ -1,0 +1,71 @@
+** first try at Anagram Groups(leet code #49) it doesn't run the issues seems to be : 
+
+Return Type of groupAnagrams: The method groupAnagrams is supposed to return a List<List<String>> but currently it returns a Collection<Deque<String>>.
+
+Reuse of Deque: A new Deque object should be created inside the else block, not outside the loop.
+
+Quicksort Function: The quicksort function is not sorting correctly because the logic for choosing the pivot and partitioning needs to be refined. Also, using the Random class without setting a seed can lead to non-deterministic behavior which is not ideal for sorting.
+
+Typing: The typing for the map should be Map<String, List<String>> to match the return type.
+
+Quicksort Base Case: The quicksort implementation should correctly handle the base case when low is greater than or equal to high.
+
+Simplifying Quicksort: You can simplify your quicksort by ensuring the pivot selection and partitioning logic is correct.
+
+------------------------------------------------------------
+
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+       Map<String, Deque<String>> map = new HashMap<>();
+       Deque<String> deque = new ArrayDeque<>(); 
+
+        for(int i =0; i<strs.length;i++){
+            Deque<String> deque = new ArrayDeque<>(); 
+            String a = strs[i];
+           char[] ch = a.toCharArray();
+            quicksort(ch);
+            String b = String.valueOf(ch);
+            if (map.containsKey(b)){
+                map.get(b).add(a);
+            }
+            else {
+                map.put(b, deque);
+                map.get(b).add(a);
+            }
+
+
+        }
+        return map.values();
+
+
+
+    }
+}
+public static void quicksort (char[] arr){
+    quicksort(arr,0,arr.length-1);
+}
+// quic sort allgorithm ##  O(n log n) in the best case and average case, and O(n^2) in the worst case#
+public static void quicksort (char [] arr,int low,int high){
+    if (low >= high){
+        return;
+    }
+    int a = new Random().nextInt(high-low)+low;
+    int piv = arr[a];
+    swap(arr,a,high);
+    int lp = low;
+    int rp = high;
+    while (lp<rp){
+        while(arr[lp]<=piv && lp < rp ){lp++;}
+        while(arr[rp]>=piv && lp < rp ){rp--;}
+        swap(arr,lp,rp);
+    }
+    swap (arr,lp,high);
+    quicksort (arr,low,lp-1);
+    quicksort (arr,rp+1,high);
+}
+// implementation of swap metod for quick sort 
+public static void swap (char [] arr, int id1,int id2){
+    char temp = arr[id1];
+    arr[id1] = arr[id2];
+    arr[id2] = temp;
+}
