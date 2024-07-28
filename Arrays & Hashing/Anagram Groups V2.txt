@@ -1,0 +1,51 @@
+** version 2 with the corrected parameters 
+
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        Map<String, List<String>> map = new HashMap<>();
+
+        for (String a : strs) {
+            char[] ch = a.toCharArray();
+            Arrays.sort(ch);
+            String b = new String(ch);
+            if (!map.containsKey(b)) {
+                map.put(b, new ArrayList<>());
+            }
+            map.get(b).add(a);
+        }
+        return new ArrayList<>(map.values());
+    }
+
+    public static void quicksort(char[] arr) {
+        quicksort(arr, 0, arr.length - 1);
+    }
+
+    public static void quicksort(char[] arr, int low, int high) {
+        if (low >= high) {
+            return;
+        }
+        int a = new Random().nextInt(high - low + 1) + low;
+        int piv = arr[a];
+        swap(arr, a, high);
+        int lp = low;
+        int rp = high;
+        while (lp < rp) {
+            while (arr[lp] <= piv && lp < rp) { lp++; }
+            while (arr[rp] >= piv && lp < rp) { rp--; }
+            swap(arr, lp, rp);
+        }
+        swap(arr, lp, high);
+        quicksort(arr, low, lp - 1);
+        quicksort(arr, rp + 1, high);
+    }
+
+    public static void swap(char[] arr, int id1, int id2) {
+        char temp = arr[id1];
+        arr[id1] = arr[id2];
+        arr[id2] = temp;
+    }
+
+
+ }
+
+
