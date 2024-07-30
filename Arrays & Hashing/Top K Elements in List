@@ -1,0 +1,32 @@
+class Solution {
+    public int[] topKFrequent(int[] nums, int k) {
+        // going to be using bucket sort 
+        int [] ans = new int [k]; 
+        int ind =0;
+        Map<Integer, Integer> a = new HashMap<>();
+        List<Integer>[] fr = new List[nums.length + 1];
+        for (int i = 0; i<nums.length+1;i++){
+            fr[i] = new ArrayList<>();
+        }
+
+        for (int n : nums) {
+            a.put(n, a.getOrDefault(n, 0) + 1);
+        }
+        for (Integer key : a.keySet()) {
+            Integer value = a.get(key);
+            fr[value].add(key);
+        }
+        for (int i = fr.length - 1; i > 0 && ind < k; i--) {
+             for (int n : fr[i]) {
+                ans[ind++] = n;
+                if (ind == k) {
+                    return ans;
+                }
+            }
+
+        }
+
+        return ans;
+
+    }
+}
