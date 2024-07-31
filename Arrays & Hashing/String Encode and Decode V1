@@ -1,0 +1,36 @@
+import java.util.ArrayList;
+import java.util.List;
+
+class Solution {
+
+    public String encode(List<String> strs) {
+        String ans = "";
+        String b = "#";
+        for (int i = 0; i < strs.size(); i++) {
+            String a = strs.get(i);
+            int cnt = a.length();
+            ans = ans + cnt + b + a;
+        }
+        return ans;
+    }
+
+    public List<String> decode(String str) {
+        List<String> ans = new ArrayList<>();
+        int a = 0;
+        boolean wrd = false;
+        for (int i = 0; i < str.length(); i++) {
+            if (!wrd) {
+                if (str.charAt(i) != '#') {
+                    a = a * 10 + Character.getNumericValue(str.charAt(i));
+                } else {
+                    wrd = true;
+                }
+            } else {
+                ans.add(str.substring(i, i + a));
+                i = i + a - 1; // Adjust index after adding the substring
+                a = 0;
+                wrd = false;
+            }
+        }
+        return ans;
+    }
