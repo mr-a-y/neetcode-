@@ -1,0 +1,49 @@
+// description of what I have learned 
+*************************************************************************************************************************************************************************
+* in this leet code #150 I used stack due solve this issue due to it being efficient at retrieving and storing a theoretically infinite number                          *
+* of numbers and allowing me to do it in constant time and the fact that I only need the 2 most recent numbers pushed made it fit this criteria.                        *
+* this problem was very useful due to it allowed me to see the difference between integers.valueOf() vs Integer.parseInt() the former only accepts                      *
+* string and the latter accepts string, int, and character but returns the uni code of char and returns an object while integer.parseInt()                              *
+* returns a primitive int the other returns an object. I also learned that when comparing strings "==" compares the address, not the content which we use .equals to do.*
+************************************************************************************************************************************************************************
+class Solution {
+    public int evalRPN(String[] tokens) {
+        int ans =0;
+        int a = 0;
+        int b = 0;
+        Stack<Integer> s= new Stack<>();
+        for (int i =0;i<tokens.length;i++){
+            if(tokens[i].equals("+")){
+                a=s.pop();
+                b=s.pop();
+                ans = a+b;
+                s.push(ans);
+
+            }
+            else if(tokens[i].equals("-")){
+                a=s.pop();
+                b=s.pop();
+                ans = b-a;
+                s.push(ans);
+
+            }
+            else if(tokens[i].equals("*")){
+                a=s.pop();
+                b=s.pop();
+                ans = a*b;
+                s.push(ans);
+            }
+            else if(tokens[i].equals("/")){
+                a=s.pop();
+                b=s.pop();
+                ans = b/a;
+                s.push(ans);
+            }
+            else{
+               s.push(Integer.valueOf(tokens[i]));
+            }
+        }
+        ans =s.pop();
+        return ans;
+    }
+}
