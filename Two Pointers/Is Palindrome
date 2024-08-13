@@ -1,0 +1,51 @@
+// this is the is Palindrome problem (leet code 125)
+// in this problem i had learn that when trying to iterate over a string it is best to use 2 pointer, one at the bigginging and 1 at the end 
+// and i also learned that i need to view the unicode of a a char and pull it out and how to check it and compare it 
+
+
+class Solution {
+    public boolean isPalindrome(String s) {
+        boolean ans = true; 
+        int rc=s.length()-1;
+        int lc=0;
+        // charAt(index);
+        //toLowerCase();
+        //getUnicode(char c); 
+        while (lc<rc){
+            int a = uni(s.charAt(lc));
+            int b = uni(s.charAt(rc));
+            if(check(a)){
+                if (check(b)){
+                    if (b==a){
+                        rc--;
+                        lc++;
+                    }
+                    else{
+                        return false;
+                    }
+                }
+                else{
+                    rc--;
+                }
+
+            }
+            else{
+                lc++;
+            }
+            
+
+
+        }
+        return ans ;
+    }
+    public boolean check(int a){
+        boolean ans = false ;
+        if ((48 <= a && a <= 57) || (97 <= a && a <= 122)) {
+            ans = true;
+        }
+        return ans ;
+    }
+    public int uni(char c) {
+        return (int) Character.toLowerCase(c); // Fixed getUnicode to actually return the unicode of the lowercase character
+    }
+}
