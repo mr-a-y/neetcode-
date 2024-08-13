@@ -1,0 +1,22 @@
+class Solution {
+    public int[] twoSum(int[] numbers, int target) {
+        // leet code 167
+        int l =0;
+        int r = numbers.length-1;
+        int temp=0;
+        while(l<r){
+            temp=numbers[l]+numbers[r];
+            if(temp==target){
+                return new int[]{++l,++r}; //return new int[]{l++,r++};  i found out the difference between post vs pre incrementation 
+            }                              // ++a does the "+1" before and a++ add's the 1 after the opperation 
+            else if(temp<target) {
+                l++;
+            }
+            else {
+                r--;
+            }
+        }
+        return new int [2];// new thing i found out  new thing i found out was that you could return with this 
+
+    }
+}
