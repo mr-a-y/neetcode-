@@ -1,0 +1,24 @@
+# leet code number 9
+class Solution {
+    public boolean isPalindrome(int x) {
+        if(x<0){
+            return false ;
+        }
+        String str = Integer.toString(x);
+        int a=str.length()-1;
+        int b=0;
+        while(a>b){
+            char a1=str.charAt(a);
+            char b1=str.charAt(b);
+            if(b1==a1){
+                a--;
+                b++;
+            }
+            else{
+                return false;
+            }
+        }
+        return true;
+
+    }
+}
